@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedural Map Generator</title>
+    <meta http-equiv="refresh" content="1">
+</head>
+<body>
+    <script src="./main.js"></script>
+    <script>
+        let map_generator = new MapGenerator();
+
+        let new_map = map_generator.generateMap(40, 30, [0,0,0]);
+
+        map_generator.setMap(new_map);
+        map_generator.generateBiomaUsingCords(20,15,1,11, propagate=12000)
+        map_generator.generateBiomaUsingCords(20,15,1,8, propagate=10000)
+        map_generator.generateBiomaUsingCords(20,15,1,7, propagate=5000)
+        map_generator.generateBiomaUsingCords(20,15,1,9, propagate=3000)
+        map_generator.generateBiomaUsingCords(20,15,1,10, propagate=500)
+
+        let result = map_generator.getMap();
+
+
+        for (let i = 0; i < result.length; i++) {
+            let row = document.createElement("div");
+            row.style ="display:flex;"
+            document.body.appendChild(row)
+            for (let j = 0; j < result[i].length; j++) {
+                let div = document.createElement("div");
+                div.style="width:20px;height:20px;"
+                if (result[i][j][1] == 9)
+                {
+                    div.style.backgroundColor = "green"
+                }
+                else if (result[i][j][1] == 10)
+                {
+                    div.style.backgroundColor = "darkgreen"
+                }
+                else if (result[i][j][1] == 8)
+                {
+                    div.style.backgroundColor = "blue"
+                }
+                else if (result[i][j][1] == 11)
+                {
+                    div.style.backgroundColor = "darkblue"
+                }
+                else if (result[i][j][1] == 7)
+                {
+                    div.style.backgroundColor = "#ffff9e"
+                }
+                else
+                {
+                    div.style.backgroundColor = "black"
+                }
+                row.appendChild(div)
+            }
+        }
+    </script>
+</body>
+</html>
